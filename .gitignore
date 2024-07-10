@@ -1,0 +1,3 @@
+*.tar*
+/linux/src/**
+/linuk/pkg/**

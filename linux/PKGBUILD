@@ -29,7 +29,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-chimeraos
 source=(
-  "linux-chimeraos.tar.gz::https://github.com/ChimeraOS/linux/archive/refs/tags/$_srctag.tar.gz"
+  "linux-chimeraos.tar.gz::https://github.com/NeroReflex/linux/archive/refs/tags/msi-claw-v1.tar.gz"
   config  # the main kernel config file
   config-chimera # our config that will be merged
 )
@@ -40,13 +40,14 @@ validpgpkeys=(
   A2FF3A36AAA56654109064AB19802F8B0D70FC30  # Jan Alexander Steffens (heftig)
   C7E7849466FE2358343588377258734B41C31549  # David Runge <dvzrv@archlinux.org>
 )
-b2sums=('e0eff5f98afdf63f282a9c8e2314f7415b76b2b7ba4786e434ee102cd9fef0c1b652c54c606ba40a6eb6e8844b2b579df8651431e52850273f66ebf62eab5e47'
-        'e66457a7e402ecd46e2bdfa6dc1efce1e1feb2619d7c22386fe25ee62e064bb1a2e7069e8ae58a06463beac4920a63f8cc0d7db740502751a22cfd5e042d123a'
+b2sums=('SKIP'
+        'SKIP'
         '7a23cc6ee62a4a888531dfc321dbbdae12ba2589f196ea258d2cebbff76f3850627813404be1d83db4bb6f271800b85b9a00c39ec03796bdd0cb6f095013565a')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
-export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
+export KBUILD_BUILD_TIMESTAMP=""
+export CC="ccache gcc"
 
 _make() {
   test -s version
@@ -54,8 +55,10 @@ _make() {
 }
 
 prepare() {
-  mv linux-${pkgver%.*}-${pkgver##*.} $_srcname
+  dirname=$(find -maxdepth 1 -type d | grep "linux")
+  cp -r $dirname $_srcname
   cd $_srcname
+  rm -rf "$dirname"
 
   echo "Setting version..."
   echo "${pkgbase#linux}" > localversion.10-pkgname
