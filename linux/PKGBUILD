@@ -29,7 +29,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-chimeraos
 source=(
-  "linux-chimeraos.tar.gz::https://github.com/NeroReflex/linux/archive/refs/tags/msi-claw-v2.tar.gz"
+  "linux-chimeraos.tar.gz::https://github.com/NeroReflex/linux/archive/refs/tags/msi-claw-v3.tar.gz"
   config  # the main kernel config file
   config-chimera # our config that will be merged
 )
