@@ -42,7 +42,7 @@ validpgpkeys=(
 )
 b2sums=('SKIP'
         'SKIP'
-        '7a23cc6ee62a4a888531dfc321dbbdae12ba2589f196ea258d2cebbff76f3850627813404be1d83db4bb6f271800b85b9a00c39ec03796bdd0cb6f095013565a')
+         'SKIP')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
