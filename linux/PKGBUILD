@@ -1,12 +1,11 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
-pkgbase=linux-chimeraos
+pkgbase=linux-test
 pkgver=6.10.0
 pkgrel=1
-pkgdesc='Linux ChimeraOS'
-_srctag=v${pkgver%.*}-${pkgver##*.}
-url="https://github.com/ChimeraOS/linux/commits/$_srctag"
+pkgdesc='Linux test'
+url="https://github.com/ChimeraOS/linux/"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
@@ -29,7 +28,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-chimeraos
 source=(
-  "linux-chimeraos.tar.gz::https://github.com/NeroReflex/linux/archive/refs/tags/iio-fix-v1.tar.gz"
+  "https://github.com/NeroReflex/linux/archive/refs/tags/iio-bmi323-save-regs-rfc.tar.gz"
   config  # the main kernel config file
   config-chimera # our config that will be merged
 )
