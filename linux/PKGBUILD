@@ -1,11 +1,11 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
-pkgbase=linux-test
-pkgver=6.10.0
+pkgbase=linux-asus-stable
+pkgver=6.11.0
 pkgrel=1
-pkgdesc='Linux test'
-url="https://github.com/ChimeraOS/linux/"
+pkgdesc='Linux ASUS'
+url="https://gitlab.com/flukejones/linux"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
@@ -18,6 +18,9 @@ makedepends=(
   python
   tar
   xz
+  clang
+  llvm
+  lld
 
   # htmldocs
   #graphviz
@@ -28,7 +31,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-chimeraos
 source=(
-  "https://github.com/NeroReflex/linux/archive/refs/tags/iio-bmi323-save-regs-patch.tar.gz"
+  "https://gitlab.com/flukejones/linux/-/archive/asus-next-stable/linux-asus-next-stable.tar.bz2"
   config  # the main kernel config file
   config-chimera # our config that will be merged
 )
@@ -46,11 +49,11 @@ b2sums=('SKIP'
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP=""
-export CC="ccache gcc"
+export CC="ccache clang"
 
 _make() {
   test -s version
-  make KERNELRELEASE="$(<version)" "$@"
+  LLVM=1 make KERNELRELEASE="$(<version)" "$@"
 }
 
 prepare() {
@@ -62,9 +65,9 @@ prepare() {
   echo "Setting version..."
   echo "${pkgbase#linux}" > localversion.10-pkgname
   echo "-$pkgrel" > localversion.20-pkgrel
-  make defconfig
-  make -s kernelrelease > version
-  make mrproper
+  LLVM=1 make defconfig
+  LLVM=1 make -s kernelrelease > version
+  LLVM=1 make mrproper
 
   local src
   for src in "${source[@]}"; do
