@@ -4,7 +4,7 @@
 pkgbase=linux-asus-stable
 pkgver=6.11.0
 pkgrel=1
-pkgdesc='Linux ASUS'
+pkgdesc='Linux ASUS eGPU'
 url="https://gitlab.com/flukejones/linux"
 arch=(x86_64)
 license=(GPL2)
@@ -31,7 +31,7 @@ makedepends=(
 options=('!strip')
 _srcname=linux-chimeraos
 source=(
-  "https://gitlab.com/flukejones/linux/-/archive/asus-next-stable/linux-asus-next-stable.tar.bz2"
+  "https://github.com/NeroReflex/linux/archive/refs/tags/egpu-test.tar.gz"
   config  # the main kernel config file
   config-chimera # our config that will be merged
 )
